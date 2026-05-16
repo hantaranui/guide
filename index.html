@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guide projet</title>
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navigation du guide">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">G</div>
+          <div>
+            <p class="eyebrow">Guide projet</p>
+            <h1>Base de connaissances</h1>
+          </div>
+        </div>
+
+        <label class="search-label" for="searchInput">Recherche</label>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m21 21-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" />
+          </svg>
+          <input id="searchInput" type="search" placeholder="Ex. planning, équipe, livrables..." autocomplete="off" />
+        </div>
+
+        <p class="search-help">Tape un mot-clé ou une question courte. Les blocs les plus proches remontent en premier.</p>
+
+        <div class="filters" id="filters" aria-label="Filtres par catégorie"></div>
+
+        <div class="sidebar-actions">
+          <button class="button primary" id="addBlockBtn" type="button">
+            <span aria-hidden="true">+</span>
+            Ajouter un bloc
+          </button>
+          <button class="button" id="exportBtn" type="button">
+            <span aria-hidden="true">↓</span>
+            Exporter
+          </button>
+          <label class="button file-button" for="importInput">
+            <span aria-hidden="true">↑</span>
+            Importer
+          </label>
+          <input id="importInput" class="visually-hidden" type="file" accept="application/json" />
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="toolbar" aria-label="Actions et statut">
+          <div>
+            <p class="eyebrow">Résultats</p>
+            <h2 id="resultTitle">Tous les blocs</h2>
+            <p class="toolbar-note" id="resultNote">Guide structuré depuis les documents SynOps.</p>
+          </div>
+          <div class="status-line">
+            <span id="resultCount">0 bloc</span>
+            <span id="saveStatus">Sauvegardé localement</span>
+          </div>
+        </section>
+
+        <section class="editor-panel" aria-label="Édition rapide du guide">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Source du guide</p>
+              <h2>Éditeur de blocs</h2>
+            </div>
+            <button class="icon-button" id="toggleEditorBtn" type="button" aria-expanded="false" aria-controls="editorForm" title="Afficher ou masquer l'éditeur">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14m7-7H5" />
+              </svg>
+            </button>
+          </div>
+
+          <form id="editorForm" class="editor-form collapsed">
+            <div class="field-grid">
+              <label>
+                Titre
+                <input id="blockTitle" type="text" placeholder="Ex. Objectifs du projet" />
+              </label>
+              <label>
+                Catégorie
+                <input id="blockCategory" type="text" placeholder="Ex. Cadrage" />
+              </label>
+              <label>
+                Source
+                <input id="blockSource" type="text" placeholder="Ex. Guide SynOps" />
+              </label>
+            </div>
+            <label>
+              Contenu
+              <textarea id="blockContent" rows="7" placeholder="Colle ici une partie du guide. Chaque bloc peut contenir un thème, une procédure, une règle, un planning..."></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="button primary" id="saveBlockBtn" type="submit">Enregistrer le bloc</button>
+              <button class="button" id="cancelEditBtn" type="button">Annuler</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="blocks-grid" id="blocksGrid" aria-live="polite"></section>
+        <section class="empty-state hidden" id="emptyState">
+          <h2>Aucun bloc trouvé</h2>
+          <p>Essaie un autre mot-clé ou ajoute un nouveau bloc au guide.</p>
+        </section>
+      </main>
+    </div>
+
+    <template id="blockTemplate">
+      <article class="guide-block">
+        <div class="block-topline">
+          <div class="tags">
+            <span class="category"></span>
+            <span class="source"></span>
+          </div>
+          <div class="block-actions">
+            <button class="icon-button edit-btn" type="button" title="Modifier ce bloc">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+            </button>
+            <button class="icon-button delete-btn" type="button" title="Supprimer ce bloc">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <h3></h3>
+        <p></p>
+        <div class="block-footer">
+          <button class="button small edit-footer-btn" type="button">
+            <span aria-hidden="true">✎</span>
+            Modifier
+          </button>
+        </div>
+      </article>
+    </template>
+
+    <script src="guide-data.js?v=2"></script>
+    <script src="script.js?v=2"></script>
+  </body>
+</html>
