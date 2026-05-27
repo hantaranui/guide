@@ -784,5 +784,117 @@ window.GUIDE_BLOCKS = [
     "source": "Comparaison mondiale",
     "content": "Trois raisons concrètes.\nPremière raison : les LLMs génératifs sont très récents. Mistral AI a été fondée en 2023. GPT-4 date de 2023. CamemBERT de 2019. L'idée de combiner des embeddings et des LLMs dans un pipeline progressif pour l'interopérabilité militaire n'aurait pas été faisable il y a cinq ans avec des outils souverains.\nDeuxième raison : la souveraineté technologique est une contrainte nouvelle. Avant les révélations sur le Cloud Act américain et les enjeux de données militaires dans les clouds étrangers, personne ne cherchait un stack 100% souverain pour ce cas d'usage. Aujourd'hui c'est une exigence. Et Mistral + CamemBERT + Grist rendent possible un stack souverain performant.\nTroisième raison : le problème a longtemps été traité par la standardisation. \"Tout le monde adopte le même standard et le problème disparaît.\" En pratique, ça ne marche pas — les armées ont des systèmes hétérogènes depuis des décennies et les cycles de standardisation sont très longs. SynOps prend le problème à l'envers : au lieu de standardiser les sources, on crée une couche de médiation qui comprend la diversité des sources.\nSynOps — Synchronisation des Opérations Deux au Carré · Women in Gen AI 2026 · Ministère des Armées",
     "keywords": []
+  },
+  {
+    "id": "block-94",
+    "title": "Comment prenez-vous en compte les échanges avec les niveaux opératif et stratégique ?",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "Question à poser au Jury: Sur les échanges entre niveaux, est-ce qu’on doit montrer la remontée des informations du terrain vers l’opératif et le stratégique, ou montrer aussi la redescente de règles, de consignes ou de mises à jour du référentiel ? Si MINARM répond les 2:\nD’accord. Et pour rester clair dans une démo courte, est-ce qu’un exemple des deux vous paraît suffisant ? On peut par exemple montrer un incident tactique qui remonte sous forme de synthèse opérative, puis une règle de traitement ou un enrichissement du référentiel qui redescend vers le niveau tactique. Est-ce que ce niveau de démonstration vous paraît suffisant ?\n\nAujourd’hui, chaque niveau — tactique, opératif, stratégique — produit et consomme l’information avec ses propres codes, ses propres priorités et parfois ses propres référentiels.\n\nSynOps ne cherche pas à uniformiser les métiers ou les décisions.\nSon rôle est plutôt de créer une continuité sémantique entre ces niveaux.\n\nPar exemple :\n- au niveau tactique, on reçoit des messages très terrain, souvent rapides, incomplets ou codifiés ;\n- au niveau opératif, on cherche à comprendre l’impact sur la manœuvre globale ;\n- au niveau stratégique, on a besoin d’une vision consolidée, contextualisée et traçable.\n\nSynOps agit comme une couche de médiation :\nil conserve le message d’origine, mais produit une interprétation partagée et explicable.\n\nCela permet :\n- de limiter les pertes de sens lors des remontées d’information ;\n- de réduire les ambiguïtés entre chaînes fonctionnelles ;\n- et surtout de garder une cohérence de compréhension entre les différents échelons de commandement.\n\nL’autre point important, c’est la traçabilité :\nà chaque étape, on sait :\n- quelle donnée est brute,\n- quelle transformation a été proposée,\n- quel niveau de confiance est associé,\n- et quel humain a validé ou non l’interprétation.\n\nDonc l’objectif n’est pas de remplacer les échanges entre niveaux,\nmais de fluidifier la circulation du sens entre eux, tout en gardant le contrôle humain et la capacité d’arbitrage à chaque échelon.",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-95",
+    "title": "Au nombre de LLM utilisé en série et au regard de la volumétrie des données entrantes, est-ce que la puissance de calcul ne sera-t-elle pas fortement limitante ?",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "Sur la puissance de calcul et l’IA frugale terrain, on voudrait vérifier ce que vous attendez exactement.\nDans la version finale, on envisage de montrer que SynOps ne fait pas tout passer directement par le LLM : les messages seraient d’abord regroupés, filtrés, comparés au référentiel et traités par règles quand c’est possible.\nLe LLM serait réservé aux cas ambigus ou contradictoires ou aux nouveaux cas.\nDonc vous voulez qu’on vous montre cette réduction des appels LLM et aussi un mode terrain frugal, capable de fonctionner avec des moyens plus légers quand la connexion est limitée?\n\nC’est justement pour éviter cette limite que nous n’utilisons pas le LLM partout ni tout le temps.\n\nL’architecture de SynOps est pensée en cascade, avec plusieurs niveaux de traitement :\n- d’abord les règles métier et le référentiel,\n- ensuite les rapprochements sémantiques plus classiques,\n- et seulement en dernier recours l’IA générative.\n\nDonc le LLM n’est sollicité que pour les cas ambigus ou réellement complexes.\n\nDans notre démonstrateur, la majorité des messages simples sont traités sans génération de texte.\nCela réduit fortement la charge de calcul et améliore la robustesse globale.\n\nEnsuite, plusieurs éléments limitent l’impact de la volumétrie :\n- les messages opérationnels sont souvent courts et structurés ;\n- les traitements peuvent être parallélisés ;\n- et surtout, SynOps ne cherche pas à “raisonner” sur tout le flux mondial en permanence.\n\nL’objectif est de faire intervenir le calcul coûteux uniquement là où il apporte une vraie valeur de compréhension.\n\nIl y a aussi un enjeu d’architecture :\nnous avons choisi des modèles locaux plus compacts, comme Mistral, précisément pour rester compatibles avec des environnements souverains et contraints.\n\nEt enfin, le système reste dégradable :\nsi le LLM devient indisponible ou saturé,\nles règles, le référentiel et les mécanismes déterministes continuent de fonctionner.\nOn perd en finesse d’interprétation, mais pas la continuité opérationnelle.\n\nDonc oui, la puissance de calcul est un sujet réel,\nmais notre approche consiste justement à réserver l’IA générative aux zones d’incertitude, pas à en faire une dépendance permanente.",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-96",
+    "title": "Le choix d’une sémantique “francophone” ne convient pas à une situation « interalliés » où l’usage de l’anglais est une exigence à prendre en compte.",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "En fait notre idée n’est pas de figer SynOps sur le français. Le démonstrateur est francophone, mais la brique modèle peut être adaptée : CamemBERT pour le français, ou un modèle multilingue comme XLM-RoBERTa dans une cible interalliée. Le pipeline reste le même ; ce qui change, c’est la brique linguistique et le contenu du référentiel.\nQuestion: Pour la finale, faut-il montrer une logique français-anglais avec l’anglais comme langue pivot, ou aller vers un référentiel multilingue où les termes ambigus sont validés par un humain avant d’être ajoutés au référentiel ?\n\nEn réalité, SynOps n’est pas conçu autour d’une langue unique, mais autour d’une médiation sémantique.\n\nLe français dans la démonstration est surtout un choix de présentation et de souveraineté technologique.\nMais l’architecture est pensée pour fonctionner dans un contexte interallié.\n\nDans une coalition, chaque acteur peut produire des messages :\n- en anglais OTAN,\n- dans sa langue nationale,\n- avec ses propres acronymes ou standards métiers.\n\nLe problème n’est donc pas uniquement linguistique,\nil est surtout sémantique :\ndeux acteurs peuvent utiliser des termes différents pour parler du même événement opérationnel.\n\nC’est précisément là que SynOps intervient.\n\nLe système peut :\n- conserver le message source dans sa langue d’origine ;\n- identifier les concepts opérationnels ;\n- puis les rapprocher d’un référentiel commun partagé.\n\nL’objectif n’est pas de “traduire mot à mot”,\nmais d’obtenir une compréhension alignée entre partenaires.\n\nD’ailleurs, l’usage d’un LLM multilingue permet justement de gérer :\n- les synonymes,\n- les formulations OTAN (Organisation du traité de l'Atlantique nord : Une Alliance défensive qui assure la sécurité et la défense de l'espace euro-atlantique depuis plus de 70 ans),\n- les différences doctrinales,\n- ou certains écarts de vocabulaire entre nations alliées.\n\nEt le contrôle humain reste essentiel :\ndans un contexte interallié, certaines interprétations doivent être validées par les analystes ou les officiers de liaison.\n\nDonc la francophonie n’est pas une limite structurelle du système.\nAu contraire, le démonstrateur montre qu’on peut construire une couche de compréhension partagée au-dessus de systèmes et de langues différentes.",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-97",
+    "title": "Au niveau des données, est-ce que vous avez des éléments par rapport à cet aspect ?",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "Sur la sécurité des données, on veut éviter une réponse trop générale. Selon vous, quel est le point de vigilance prioritaire à traiter dans notre solution finale ?\nSi réponse pas trop claire: Est-ce que votre inquiétude porte plutôt sur l’accès aux données, leur traçabilité, ou ce qui est transmis au LLM ?",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-98",
+    "title": "J’aimerais bien que vous me développiez les interruptions ou justement les failles. Et comment ça réagit et comment l’IA nous aide à réagir.",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "Quand vous avez évoqué les interruptions et les failles, quel type de situation aviez-vous principalement en tête ?\nSi besoin de relance seulement après\nEst-ce que vous pensiez plutôt à une panne technique, à une perte de source, à une donnée contradictoire, ou à une connexion dégradée ?",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-99",
+    "title": "Sur la finale elle-même.",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "Pour la finale, quel niveau attendez-vous : un démonstrateur narratif enrichi avec l'architecture complète, ou un prototype fonctionnel avec de vrais appels LLM en temps réel ?",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-100",
+    "title": "Sur ce qu’ils imaginent déjà.",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "J’ai une question sur le positionnement de SynOps. Comme SynOps est pensé comme une couche de médiation sémantique entre des sources hétérogènes, faut-il rester pour la finale à un niveau conceptuel, ou évoquer aussi des interfaces possibles avec des systèmes d’information de commandement, de renseignement ou de planification ?",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
+  },
+  {
+    "id": "block-101",
+    "title": "Sur ce qui leur manquait en demi-finale.",
+    "category": "Finale",
+    "source": "Préparation finale",
+    "content": "Avant de conclure, j’ai une dernière question de cadrage : au-delà des trois questions reçues, y a-t-il un point que vous jugez important de faire apparaître dans notre démonstrateur final ?",
+    "keywords": [
+      "finale",
+      "jury",
+      "demi-finale",
+      "cadrage",
+      "question"
+    ]
   }
 ];
