@@ -1,4 +1,4 @@
-const STORAGE_KEY = "project-guide-blocks-v2";
+const STORAGE_KEY = "project-guide-blocks-v3";
 
 const starterBlocks = window.GUIDE_BLOCKS || [
   {
