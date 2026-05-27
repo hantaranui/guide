@@ -60,6 +60,7 @@ const exportBtn = document.querySelector("#exportBtn");
 const importInput = document.querySelector("#importInput");
 const template = document.querySelector("#blockTemplate");
 
+saveBlocks();
 render();
 
 searchInput.addEventListener("input", render);
@@ -145,7 +146,8 @@ importInput.addEventListener("change", async (event) => {
 function loadBlocks() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return normalizeBlocks(saved ? JSON.parse(saved) : starterBlocks);
+    const savedBlocks = saved ? JSON.parse(saved) : [];
+    return mergeWithStarterBlocks(savedBlocks);
   } catch {
     return normalizeBlocks(starterBlocks);
   }
@@ -164,9 +166,25 @@ function normalizeBlocks(items) {
   }));
 }
 
+function mergeWithStarterBlocks(savedBlocks) {
+  const normalizedSaved = normalizeBlocks(savedBlocks);
+  const normalizedStarter = normalizeBlocks(starterBlocks);
+
+  if (!normalizedSaved.length) return normalizedStarter;
+
+  const savedKeys = new Set(normalizedSaved.map(blockKey));
+  const missingStarterBlocks = normalizedStarter.filter((block) => !savedKeys.has(blockKey(block)));
+  return [...normalizedSaved, ...missingStarterBlocks];
+}
+
+function blockKey(block) {
+  return normalize(`${block.title || ""} ${block.category || ""}`);
+}
+
 function normalizeCategory(category) {
   const value = String(category || "Sans catégorie").trim();
-  if (normalize(value) === "question jury") return "Questions jury";
+  const normalized = normalize(value);
+  if (normalized.includes("question") && normalized.includes("jury")) return "Questions jury";
   return value;
 }
 
@@ -222,6 +240,7 @@ function renderFilters() {
   const preferredOrder = [
     "Tous",
     "Questions jury",
+    "Finale",
     "Pipeline",
     "Technique",
     "Comparaison",
